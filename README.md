@@ -1,5 +1,7 @@
 # cacs - Coding Agent Config Sync
 
+[English](README_EN.md)
+
 跨 Mac/Linux 设备同步 AI 编程助手配置的命令行工具。通过 GitHub 私有仓库存储配置，支持 pull/push/备份/回滚。
 
 ## 支持的工具
