@@ -12,6 +12,14 @@ A CLI tool for syncing AI coding assistant configurations across Mac/Linux devic
 
 ## Installation
 
+### Quick Install (Recommended)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hjnnjh/coding-agent-config-sync/main/install.sh | sh
+```
+
+### Manual Install
+
 ```bash
 # Clone the project
 git clone <repo-url>

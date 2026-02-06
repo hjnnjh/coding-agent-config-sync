@@ -12,6 +12,14 @@
 
 ## 安装
 
+### 一键安装（推荐）
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hjnnjh/coding-agent-config-sync/main/install.sh | sh
+```
+
+### 手动安装
+
 ```bash
 # 克隆项目
 git clone <repo-url>
