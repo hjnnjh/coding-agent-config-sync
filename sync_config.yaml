@@ -8,6 +8,9 @@ items:
     repo_path: "claude-code-router/config.json"
     target_path: "~/.claude-code-router/config.json"
     type: "file"
+    # ignore_fields:  # dot-separated paths to skip during sync
+    #   - "mcpServers.filesystem.args"
+    #   - "secretKey"
 
   - name: "ccr-presets"
     repo_path: "claude-code-router/presets"

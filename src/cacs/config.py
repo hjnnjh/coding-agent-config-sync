@@ -16,6 +16,7 @@ class SyncItem:
     repo_path: str
     target_path: str
     type: str = "file"
+    ignore_fields: list[str] = field(default_factory=list)
 
     def __post_init__(self):
         self.target_path = str(Path(self.target_path).expanduser())
