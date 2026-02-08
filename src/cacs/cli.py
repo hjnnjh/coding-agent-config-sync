@@ -21,8 +21,19 @@ from cacs.sync import SyncEngine
 @click.pass_context
 def main(ctx: click.Context, config_path: Optional[str]) -> None:
     """Coding Agent Config Sync."""
+    _background_update_check()
     ctx.ensure_object(dict)
     ctx.obj["config_path"] = config_path
+
+
+def _background_update_check() -> None:
+    """Run background update check, silent on failure."""
+    try:
+        from cacs.updater import background_check
+
+        background_check()
+    except Exception:
+        pass
 
 
 def _get_engine(ctx: click.Context) -> SyncEngine:
@@ -135,3 +146,35 @@ def uninstall() -> None:
     from cacs.installer import uninstall as do_uninstall
 
     do_uninstall()
+
+
+@main.group()
+def update() -> None:
+    """Check and install updates."""
+
+
+@update.command(name="check")
+def update_check() -> None:
+    """Check for available updates."""
+    from cacs.updater import check_update
+
+    info = check_update()
+    if info is None:
+        click.echo("Failed to check for updates.")
+        return
+    click.echo(f"Current version: {info.current}")
+    click.echo(f"Latest version:  {info.latest}")
+    if info.has_update:
+        click.echo("Run `cacs update install` to upgrade.")
+    else:
+        click.echo("Already up to date.")
+
+
+@update.command(name="install")
+def update_install() -> None:
+    """Download and install the latest version."""
+    from cacs.updater import run_update
+
+    click.echo("Updating cacs...")
+    result = run_update()
+    click.echo(result)
