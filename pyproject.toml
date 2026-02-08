@@ -1,6 +1,6 @@
 [project]
 name = "cacs"
-version = "0.1.0"
+version = "0.2.0"
 description = "Coding Agent Config Sync"
 requires-python = ">=3.12"
 dependencies = ["click>=8.1", "pyyaml>=6.0"]
