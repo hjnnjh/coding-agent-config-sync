@@ -53,6 +53,20 @@ items:
 
 Each sync item requires `name`, `repo_path` (path in repo), `target_path` (local path), and `type` (`file` or `directory`).
 
+### ignore_fields (JSON files)
+
+For JSON config files, use `ignore_fields` to specify fields (dot-separated paths) to skip during sync. Ignored fields retain their local values on pull and are excluded from status comparison.
+
+```yaml
+  - name: "ccr-config"
+    repo_path: "claude-code-router/config.json"
+    target_path: "~/.claude-code-router/config.json"
+    type: "file"
+    ignore_fields:
+      - "mcpServers.filesystem.args"
+      - "secretKey"
+```
+
 ## Usage
 
 ```bash
@@ -77,9 +91,17 @@ cacs backup restore
 # Restore from a specific backup
 cacs backup restore 20250206_120000_pull
 
+# Check for updates
+cacs update check
+
+# Install latest version
+cacs update install
+
 # Uninstall
 cacs uninstall
 ```
+
+> Auto-update check runs on every command (24h throttle). A hint is shown when a new version is available.
 
 ## Global Options
 

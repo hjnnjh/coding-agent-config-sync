@@ -53,6 +53,20 @@ items:
 
 每个同步项需指定 `name`、`repo_path`（仓库内路径）、`target_path`（本地路径）和 `type`（`file` 或 `directory`）。
 
+### ignore_fields（JSON 文件）
+
+对于 JSON 类型的配置文件，可通过 `ignore_fields` 指定同步时忽略的字段（点号分隔路径）。被忽略的字段在 pull 时会保留本地值，在 status 比较时也会跳过。
+
+```yaml
+  - name: "ccr-config"
+    repo_path: "claude-code-router/config.json"
+    target_path: "~/.claude-code-router/config.json"
+    type: "file"
+    ignore_fields:
+      - "mcpServers.filesystem.args"
+      - "secretKey"
+```
+
 ## 使用
 
 ```bash
@@ -77,9 +91,17 @@ cacs backup restore
 # 从指定备份恢复
 cacs backup restore 20250206_120000_pull
 
+# 检查更新
+cacs update check
+
+# 安装最新版本
+cacs update install
+
 # 卸载
 cacs uninstall
 ```
+
+> 每次运行命令时会自动检查更新（24 小时限频），有新版本时会在输出末尾提示。
 
 ## 全局选项
 
